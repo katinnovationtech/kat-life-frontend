@@ -22,11 +22,6 @@
        font-weight: abstracts.$font-regular;
        margin: 60px 0px 60px 0px;
     }
-    .img-box{
-        border: 1px solid abstracts.$body-text-color;
-        padding: 100px 100px;
-        margin: 40px 0px 30px 0px;
-    }
     p {
         margin: 35px 0px 40px 0px
     }
@@ -47,11 +42,16 @@
 
 .mission {
     background-color: abstracts.$accent-color;
+    margin-top: 130px;
+    h2 {
+        margin: 60px 0px 60px 0px;
+    }
 }
-
-
 .mission-inner {
     grid-column: 2; 
+}
+.mission-image {
+    margin-bottom: 100px;
 }
 
 .about-ostaya {
