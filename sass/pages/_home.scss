@@ -1,6 +1,11 @@
 @use '../abstracts';
 
-
+.blurb-text {
+    p {
+        margin-top: 60px;
+        font-size: 20px;
+    }
+}
 .why-ostaya {
    h2 {
     text-align: center;

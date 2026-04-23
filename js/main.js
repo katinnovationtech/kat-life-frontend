@@ -42,7 +42,7 @@ gsap.utils.toArray(".zoom-img").forEach((img) => {
       scale: 1
     },
     {
-      scale: 1.15, // zoom strength
+      scale: 1.15, 
       ease: "none",
       scrollTrigger: {
         trigger: img,
