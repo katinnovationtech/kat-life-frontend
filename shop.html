@@ -6,8 +6,7 @@
     <title>Shop - KAT LIFE</title>
     <link rel="stylesheet" href="css/grid.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/shop-styles.css"> <!-- New specific shop styles -->
-    
+    <link rel="stylesheet" href="css/shop-styles.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -15,7 +14,6 @@
 <body>
     <h1 class="hidden">Shop Kat Life</h1>
 
-    <!-- Header (Matching index.html) -->
     <header id="main-header" class="full-width-grid-con">
         <input type="checkbox" id="hamburger">
         <label for="hamburger" id="ham-burger">
@@ -42,7 +40,6 @@
     </header>
 
     <main style="margin-top: 90px;">
-        <!-- Hero Section -->
         <section class="about-hero">
             <div class="grid-con">
                 <div class="col-span-full">
@@ -54,8 +51,7 @@
                 </div>
             </div>
         </section>
-    
-        <!-- Filter & Sort Bar -->
+
         <section class="grid-con" style="margin-bottom: 40px;">
             <div class="col-span-full" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 20px;">
                 <div>
@@ -77,92 +73,12 @@
                 </div>
             </div>
         </section>
-    
-        <!-- Products Grid -->
+
         <section class="grid-con" id="product-grid">
-            <!-- The products will be injected here by the script below -->
             <div class="col-span-full" id="shop-status">Loading products...</div>
         </section>
     </main>
-    
-    <!-- Logic Script -->
-    <script>
-        // 1. Manual list of products (Fixed syntax errors here)
-        const allProducts = [
-            {
-                base_product: 1,
-                name: "OSTAYA™ Core Short",
-                product_type_slug: "shorts",
-                variants: [{
-                    id: "v1",
-                    color: "Navy Blue",
-                    price: 129.00,
-                    image_url: "images/black_200.png" 
-                }]
-            },
-            {
-                base_product: 2,
-                name: "ARRO Shirt",
-                product_type_slug: "leggings",
-                variants: [{
-                    id: "v2",
-                    color: "Black",
-                    price: 149.00,
-                    image_url: "images/blue_400.png"
-                }]
-            },
-            {
-                base_product: 3,
-                name: "CURVA Shorts",
-                product_type_slug: "shorts",
-                variants: [{
-                    id: "v3",
-                    color: "Black",
-                    price: 149.00,
-                    image_url: "images/white_400.png"
-                }]
-            }
-        ];
-    
-        // 2. Function to display products
-        function renderProducts(products) {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = ''; // Clear the "Loading" message
-            
-            products.forEach(product => {
-                const variant = product.variants[0];
-                const card = document.createElement('div');
-                card.className = 'col-span-full m-col-span-4 product-card'; 
-                card.innerHTML = `
-                    <div class="img-container">
-                        <img src="${variant.image_url}" alt="${product.name}">
-                        <div class="quick-add-overlay">
-                            <p>QUICK ADD</p>
-                            <div class="size-btns">
-                                <button onclick="alert('Added XS to bag')">XS</button>
-                                <button onclick="alert('Added S to bag')">S</button>
-                                <button onclick="alert('Added M to bag')">M</button>
-                                <button onclick="alert('Added L to bag')">L</button>
-                                <button onclick="alert('Added XL to bag')">XL</button>
-                            </div>
-                        </div>
-                    </div>
-                    <p>${product.name}</p>
-                    <span>CAD$ ${variant.price.toFixed(2)}</span>
-                    <br>
-                    <button class="view-products" onclick="window.location.href='product-details.html?id=${variant.id}'">View Details</button>
-                `;
-                grid.appendChild(card);
-            });
-        }
-    
-        // 3. Initialize on load
-        document.addEventListener('DOMContentLoaded', () => {
-            renderProducts(allProducts);
-        });
-    </script>
 
-    <!-- Footer -->
     <footer id="main-footer">
         <div id="footer-inner">
             <div id="footer-logo"><img src="images/KatLifeLogo.png" alt="Logo"></div>
@@ -177,12 +93,29 @@
         </div>
     </footer>
 
-    <!-- Logic Script -->
     <script>
-        const API_URL = 'YOUR_API_URL_HERE'; // Replace with your actual config URL
-        let allProducts = [];
-        const COLOR_MAP = { 'White': '#FFFFFF', 'Black': '#000000', 'Grey': '#808080', 'Royal Blue': '#4169E1', 'Navy Blue': '#001F5B' };
-        const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+        const SIZES = ['XS', 'S', 'M', 'L', 'XL'];
+
+        const allProducts = [
+            {
+                base_product: 1,
+                name: "OSTAYA™ Core Short",
+                product_type_slug: "shorts",
+                variants: [{ id: "v1", color: "Navy Blue", price: 129.00, image_url: "images/black_200.png" }]
+            },
+            {
+                base_product: 2,
+                name: "ARRO Shirt",
+                product_type_slug: "leggings",
+                variants: [{ id: "v2", color: "Black", price: 149.00, image_url: "images/blue_400.png" }]
+            },
+            {
+                base_product: 3,
+                name: "CURVA Shorts",
+                product_type_slug: "shorts",
+                variants: [{ id: "v3", color: "Black", price: 149.00, image_url: "images/white_400.png" }]
+            }
+        ];
 
         function getSessionId() {
             let id = localStorage.getItem('cartSessionId');
@@ -193,36 +126,26 @@
             return id;
         }
 
-        async function initShop() {
-            try {
-                const [prodRes, typeRes] = await Promise.all([
-                    fetch(`${API_URL}/api/products`).then(r => r.json()),
-                    fetch(`${API_URL}/api/product-types`).then(r => r.json())
-                ]);
+        function addToCart(variantId, size, color) {
+            // Swap this alert for a real API call when your backend is ready
+            alert(`Added ${size} (${color}) to bag!`);
 
-                if (prodRes.success) {
-                    allProducts = prodRes.data;
-                    renderProducts(allProducts);
-                }
-                
-                if (typeRes.success) {
-                    const filterSelect = document.getElementById('filter-type');
-                    typeRes.data.forEach(type => {
-                        const opt = document.createElement('option');
-                        opt.value = type.slug;
-                        opt.textContent = type.name;
-                        filterSelect.appendChild(opt);
-                    });
-                }
-            } catch (err) {
-                document.getElementById('shop-status').textContent = "Error loading products.";
-            }
+            // --- Uncomment below when your API is ready ---
+            // const API_URL = 'YOUR_API_URL_HERE';
+            // fetch(`${API_URL}/api/cart`, {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ session_id: getSessionId(), product_id: variantId, size, color, quantity: 1 }),
+            // })
+            // .then(r => r.json())
+            // .then(data => { if (data.success) alert('Added to bag!'); })
+            // .catch(() => alert('Error adding to bag'));
         }
 
         function renderProducts(products) {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = '';
-            
+
             if (products.length === 0) {
                 grid.innerHTML = '<p class="col-span-full">No products found.</p>';
                 return;
@@ -233,55 +156,35 @@
                 const card = document.createElement('div');
                 card.className = 'col-span-full m-col-span-4 product-card';
                 card.innerHTML = `
-                    <div class="img-container" style="position:relative; overflow:hidden;">
-                        <img src="${variant.image_url}" alt="${product.name}" style="width:100%; height:auto;" id="img-${product.base_product}">
+                    <div class="img-container" onclick="window.location.href='items.html?id=${variant.id}'" style="cursor:pointer;">
+                        <img src="${variant.image_url}" alt="${product.name}">
                         <div class="quick-add-overlay">
-                             <p>QUICK ADD</p>
-                             <div class="size-btns">
-                                ${SIZES.map(s => `<button onclick="addToCart('${variant.id}', '${s}', '${variant.color}')">${s}</button>`).join('')}
-                             </div>
+                            <p>QUICK ADD</p>
+                            <div class="size-btns">
+                                ${SIZES.map(s => `<button onclick="event.stopPropagation(); addToCart('${variant.id}', '${s}', '${variant.color}')">${s}</button>`).join('')}
+                            </div>
                         </div>
                     </div>
                     <p>${product.name}</p>
                     <span>CAD$ ${variant.price.toFixed(2)}</span>
                     <br>
-                    <button class="view-products" onclick="window.location.href='product.html?id=${variant.id}'">View Details</button>
+                    <button class="view-products" onclick="window.location.href='items.html?id=${variant.id}'">View Details</button>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        async function addToCart(productId, size, color) {
-            try {
-                const res = await fetch(`${API_URL}/api/cart`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        session_id: getSessionId(),
-                        product_id: productId,
-                        size: size,
-                        color: color,
-                        quantity: 1,
-                    }),
-                });
-                const data = await res.json();
-                if (data.success) alert('Added to bag!');
-            } catch (err) {
-                alert('Error adding to bag');
-            }
-        }
-
-        // Listeners for Filter/Sort
         document.getElementById('filter-type').addEventListener('change', (e) => {
-            const filtered = e.target.value === 'all' ? allProducts : allProducts.filter(p => p.product_type_slug === e.target.value);
+            const filtered = e.target.value === 'all'
+                ? allProducts
+                : allProducts.filter(p => p.product_type_slug === e.target.value);
             renderProducts(filtered);
         });
 
         document.getElementById('sort-by').addEventListener('change', (e) => {
             const val = e.target.value;
             const sorted = [...allProducts].sort((a, b) => {
-                const pA = a.variants[0].price;
-                const pB = b.variants[0].price;
+                const pA = a.variants[0].price, pB = b.variants[0].price;
                 if (val === 'price-asc') return pA - pB;
                 if (val === 'price-desc') return pB - pA;
                 if (val === 'name-asc') return a.name.localeCompare(b.name);
@@ -291,31 +194,45 @@
             renderProducts(sorted);
         });
 
-        initShop();
+        document.addEventListener('DOMContentLoaded', () => renderProducts(allProducts));
     </script>
 
     <style>
-        /* Additional styling for the Quick Add effect */
+        .img-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .img-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
         .img-container:hover .quick-add-overlay {
             opacity: 1;
             bottom: 0;
         }
         .quick-add-overlay {
             position: absolute;
-            bottom: -50px;
+            bottom: -60px;
             left: 0;
             width: 100%;
             background: rgba(255,255,255,0.9);
             transition: all 0.3s ease;
             opacity: 0;
             padding: 10px 0;
+            text-align: center;
+        }
+        .quick-add-overlay p {
+            margin: 0 0 6px;
+            font-size: 12px;
+            letter-spacing: 1px;
         }
         .size-btns button {
             background: none;
             border: 1px solid #789b9b;
             color: #789b9b;
             margin: 2px;
-            padding: 5px;
+            padding: 5px 8px;
             cursor: pointer;
         }
         .size-btns button:hover {

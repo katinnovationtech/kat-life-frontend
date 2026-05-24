@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - KAT LIFE</title>
+    <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .product-detail-section {
+            margin: 60px auto;
+            max-width: 1100px;
+            padding: 0 20px;
+            display: flex;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        /* Left: image */
+        .product-image-col {
+            flex: 1;
+        }
+        .product-image-col img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Right: info */
+        .product-info-col {
+            flex: 1;
+            padding-top: 20px;
+        }
+        .product-info-col .product-type {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #789b9b;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .product-info-col h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .product-info-col .price {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 24px;
+        }
+        .product-info-col .description {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Size selector */
+        .size-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .size-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .size-options button {
+            background: none;
+            border: 1px solid #789b9b;
+            color: #789b9b;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        .size-options button:hover,
+        .size-options button.selected {
+            background: #789b9b;
+            color: white;
+        }
+
+        /* Add to bag button */
+        .add-to-bag-btn {
+            width: 100%;
+            padding: 16px;
+            background: #789b9b;
+            color: white;
+            border: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.2s;
+            margin-bottom: 16px;
+        }
+        .add-to-bag-btn:hover {
+            background: #5a7f7f;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #789b9b;
+            font-size: 13px;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Features list */
+        .features {
+            border-top: 1px solid #eee;
+            padding-top: 24px;
+            margin-top: 10px;
+        }
+        .features h3 {
+            font-size: 13px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .features ul li {
+            font-size: 13px;
+            color: #555;
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .features ul li::before {
+            content: "— ";
+            color: #789b9b;
+        }
+
+        /* Not found state */
+        .not-found {
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .not-found h2 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .product-detail-section {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="main-header" class="full-width-grid-con">
+        <input type="checkbox" id="hamburger">
+        <label for="hamburger" id="ham-burger">
+            <img src="images/ham-burger-menu.svg" alt="Menu">
+        </label>
+        <div id="logo" class="col-start-1 col-end-2">
+            <img src="images/KatLifeLogo.png" alt="Logo">
+        </div>
+        <div id="main-nav" class="m-col-start-2 m-col-end-13 l-col-end-12">
+            <nav class="burger-con">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="signin.html">Sign In</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-icons col-start-4 col-end-5 m-col-start-11 m-col-end-13 l-col-start-10 l-col-end-12">
+            <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i><span id="cart-count">0</span></a>
+        </div>
+    </header>
+
+    <main style="margin-top: 90px;">
+        <div id="product-detail-root"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="main-footer">
+        <div id="footer-inner">
+            <div id="footer-logo"><img src="images/KatLifeLogo.png" alt="Logo"></div>
+            <div id="footer-about">
+                <h3>About</h3>
+                <ul><li><a href="about.html">Our Story</a></li></ul>
+            </div>
+            <div id="footer-newsletter">
+                <h3>Newsletter</h3>
+                <form>
+                    <input type="email" placeholder="Email Address" id="footer-subscribe-bar">
+                    <button>Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ---- Product catalogue (keep this in sync with shop.html) ----
+        // Later you can replace this with a fetch() call to your API
+        const PRODUCTS = [
+            {
+                id: "v1",
+                name: "OSTAYA™ Core Short",
+                product_type: "Shorts",
+                product_type_slug: "shorts",
+                color: "Navy Blue",
+                price: 129.00,
+                image_url: "images/black_200.png",
+                description: "The OSTAYA™ Core Short is engineered for performance and recovery. Built with our proprietary smart-fabric technology, it delivers gentle electrical stimulation to support bone vitality and postural alignment throughout your day.",
+                features: [
+                    "Non-invasive bone stimulation technology",
+                    "Moisture-wicking smart fabric",
+                    "4-way stretch for full range of motion",
+                    "Discreet flat-lock seams",
+                    "Machine washable"
+                ]
+            },
+            {
+                id: "v2",
+                name: "ARRO Shirt",
+                product_type: "Tops",
+                product_type_slug: "leggings",
+                color: "Black",
+                price: 149.00,
+                image_url: "images/blue_400.png",
+                description: "The ARRO Shirt combines everyday style with advanced wearable technology. Lightweight and breathable, it integrates seamlessly into your routine while actively supporting your posture and spinal health.",
+                features: [
+                    "Posture-alignment stimulation zones",
+                    "Breathable performance fabric",
+                    "Slim athletic fit",
+                    "Anti-odour treatment",
+                    "Machine washable"
+                ]
+            },
+            {
+                id: "v3",
+                name: "CURVA Shorts",
+                product_type: "Shorts",
+                product_type_slug: "shorts",
+                color: "Black",
+                price: 149.00,
+                image_url: "images/white_400.png",
+                description: "The CURVA Shorts are designed for those who demand more from their activewear. Featuring targeted stimulation panels along the hip and thigh, they promote muscle recovery and skeletal support during and after activity.",
+                features: [
+                    "Hip & thigh stimulation panels",
+                    "High-waist compression fit",
+                    "Quick-dry smart fabric",
+                    "Side pocket with secure zip",
+                    "Machine washable"
+                ]
+            }
+        ];
+
+        const SIZES = ['XS', 'S', 'M', 'L', 'XL'];
+        let selectedSize = null;
+
+        function getProductIdFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        function selectSize(btn, size) {
+            document.querySelectorAll('.size-options button').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedSize = size;
+        }
+
+        function addToCart(productId, color) {
+            if (!selectedSize) {
+                alert('Please select a size first.');
+                return;
+            }
+            alert(`Added ${selectedSize} (${color}) to bag!`);
+            // Replace with real API call when backend is ready
+        }
+
+        function renderProduct(product) {
+            const root = document.getElementById('product-detail-root');
+            root.innerHTML = `
+                <div class="product-detail-section">
+                    <div class="product-image-col">
+                        <a href="shop.html" class="back-link">← Back to Shop</a>
+                        <img src="${product.image_url}" alt="${product.name}">
+                    </div>
+                    <div class="product-info-col">
+                        <p class="product-type">${product.product_type}</p>
+                        <h1>${product.name}</h1>
+                        <p class="price">CAD$ ${product.price.toFixed(2)}</p>
+                        <p class="description">${product.description}</p>
+
+                        <p class="size-label">SELECT SIZE</p>
+                        <div class="size-options">
+                            ${SIZES.map(s => `<button onclick="selectSize(this, '${s}')">${s}</button>`).join('')}
+                        </div>
+
+                        <button class="add-to-bag-btn" onclick="addToCart('${product.id}', '${product.color}')">
+                            Pre-Order
+                        </button>
+
+                        <div class="features">
+                            <h3>FEATURES</h3>
+                            <ul>
+                                ${product.features.map(f => `<li>${f}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderNotFound() {
+            document.getElementById('product-detail-root').innerHTML = `
+                <div class="not-found">
+                    <h2>Product not found</h2>
+                    <p>The product you're looking for doesn't exist.</p>
+                    <br>
+                    <a href="shop.html" class="back-link">← Back to Shop</a>
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const id = getProductIdFromURL();
+            const product = PRODUCTS.find(p => p.id === id);
+            product ? renderProduct(product) : renderNotFound();
+        });
+    </script>
+
+</body>
+</html>

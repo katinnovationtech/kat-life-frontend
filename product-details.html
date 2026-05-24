@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - KAT LIFE</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
+
+        .product-page {
+            max-width: 1100px;
+            margin: 120px auto 60px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .product-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .product-info h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .product-info .price {
+            font-size: 20px;
+            color: #789b9b;
+            margin-bottom: 30px;
+        }
+
+        .size-grid {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .size-grid button {
+            padding: 10px 16px;
+            border: 1px solid #789b9b;
+            background: white;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .size-grid button:hover,
+        .size-grid button.selected {
+            background: #789b9b;
+            color: white;
+        }
+
+        .add-to-bag {
+            width: 100%;
+            padding: 15px;
+            background: #789b9b;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .add-to-bag:hover { background: #5a7f7f; }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #789b9b;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .product-page { grid-template-columns: 1fr; gap: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="product-page">
+    <!-- Left: Image -->
+    <div class="product-image">
+        <a href="shop.html" class="back-link">← Back to Shop</a>
+        <img id="product-img" src="" alt="Product Image">
+    </div>
+
+    <!-- Right: Info -->
+    <div class="product-info">
+        <h1 id="product-name">Loading...</h1>
+        <p class="price" id="product-price"></p>
+        <p id="product-color"></p>
+
+        <p><strong>Select Size</strong></p>
+        <div class="size-grid" id="size-grid">
+            <button onclick="selectSize(this)">XS</button>
+            <button onclick="selectSize(this)">S</button>
+            <button onclick="selectSize(this)">M</button>
+            <button onclick="selectSize(this)">L</button>
+            <button onclick="selectSize(this)">XL</button>
+        </div>
+
+        <button class="add-to-bag" onclick="addToBag()">ADD TO BAG</button>
+    </div>
+</div>
+
+<script>
+    // Same product list as shop.html
+    const allProducts = [
+        {
+            base_product: 1,
+            name: "OSTAYA™ Core Short",
+            product_type_slug: "shorts",
+            variants: [{ id: "v1", color: "Navy Blue", price: 129.00, image_url: "images/black_200.png" }]
+        },
+        {
+            base_product: 2,
+            name: "ARRO Shirt",
+            product_type_slug: "leggings",
+            variants: [{ id: "v2", color: "Black", price: 149.00, image_url: "images/blue_400.png" }]
+        },
+        {
+            base_product: 3,
+            name: "CURVA Shorts",
+            product_type_slug: "shorts",
+            variants: [{ id: "v3", color: "Black", price: 149.00, image_url: "images/white_400.png" }]
+        }
+    ];
+
+    let selectedSize = null;
+    let currentVariant = null;
+
+    // Read the ?id= from the URL
+    const params = new URLSearchParams(window.location.search);
+    const variantId = params.get('id'); // e.g. "v1"
+
+    // Find the matching product
+    const product = allProducts.find(p =>
+        p.variants.some(v => v.id === variantId)
+    );
+
+    if (product) {
+        currentVariant = product.variants.find(v => v.id === variantId);
+        document.getElementById('product-name').textContent  = product.name;
+        document.getElementById('product-price').textContent = `CAD$ ${currentVariant.price.toFixed(2)}`;
+        document.getElementById('product-color').textContent = `Color: ${currentVariant.color}`;
+        document.getElementById('product-img').src           = currentVariant.image_url;
+        document.title = product.name + ' - KAT LIFE';
+    } else {
+        document.getElementById('product-name').textContent = 'Product not found.';
+    }
+
+    function selectSize(btn) {
+        // Deselect all, select clicked
+        document.querySelectorAll('.size-grid button').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedSize = btn.textContent;
+    }
+
+    function addToBag() {
+        if (!selectedSize) {
+            alert('Please select a size first.');
+            return;
+        }
+        alert(`Added ${product.name} (${selectedSize}) to bag!`);
+        // Later: replace this alert with a real cart API call
+    }
+</script>
+
+</body>
+</html>
